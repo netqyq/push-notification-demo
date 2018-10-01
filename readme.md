@@ -99,3 +99,8 @@ Push sent to client
      connection: 'close' } }
 ```
 the notification will be send to client.
+
+## Resources
+- https://developers.google.com/web/fundamentals/codelabs/push-notifications
+- https://web-push-codelab.glitch.me/
+- https://github.com/web-push-libs
