@@ -2,12 +2,12 @@
 Client app demo for push notifications.
 
 ## Generate Keys
-First to generate the public/private keys, or just use the old key in this repo.
+First to generate the public/private keys, or just use the old key pair in the following example.
 
 ### Way 1 (using web app)
-1. access https://web-push-codelab.glitch.me/ get public and private key
-2. replace the var `applicationServerPublicKey` in main.js with the public key
-3. create Create `vapid.json` file, fill in the public/private keys, the format is like this:
+1. Access https://web-push-codelab.glitch.me/ get public and private key
+2. Replace the var `applicationServerPublicKey` in main.js with the public key
+3. Create `vapid.json` file on server side(this file file will be used by `web-push` package to send push notifications if you chose this way), then fill in the public/private keys, the format is like this:
 ```json
 {
   "publicKey": "BHebiEracmMhIzGjJdDSiKlbldZfqznZWmCUL8qAZhdYvCwhEFCg1zd52H4IAI9cxbyeMjzr7VQ5EOergUsakJE",
@@ -17,14 +17,14 @@ First to generate the public/private keys, or just use the old key in this repo.
 
 
 ### Way 2 (using web-push)
-[web-push](https://github.com/web-push-libs/web-push) lib will help you send meassage in server.
+[web-push](https://github.com/web-push-libs/web-push) lib will help you send meassage from a backend server.
 
 Create `vapid.json` file
 
 ```bash
 $ web-push generate-vapid-keys --json > vapid.json
 ```
-output
+file `vapid.json` will be like this:
 ```json
 {
   "publicKey": "BHebiEracmMhIzGjJdDSiKlbldZfqznZWmCUL8qAZhdYvCwhEFCg1zd52H4IAI9cxbyeMjzr7VQ5EOergUsakJE",
@@ -40,7 +40,7 @@ Using node package `live-server` or `web server for chrome`, then access it in b
 then click the button, enable the notification.
 
 
-## Get The Subscription
+## Get the Subscription
 
 After allow the subscribtion, you should see the Subscription Object will printed in the page or console log.
 
@@ -49,7 +49,15 @@ After allow the subscribtion, you should see the Subscription Object will printe
 ### Way 1(if your public/private keys are generate by web app)
 via https://web-push-codelab.glitch.me/ below, paste the subscribtion like this
 
-```json{"endpoint":"https://fcm.googleapis.com/fcm/send/cfA_9tbQmTc:APA91bHMKEZzt-lyJRSMUpR5o9MPR9EBIvZgqaIXTFjGWlsTnc1ZaMjcoocrzWCqGRLPjoqGfJriS3FATxzCeeNQvuuugEDCNmDYjVQ7r61puDogSvpOBUDXcBJYfAaS5c8mvsGYlZa6","expirationTime":null,"keys":{"p256dh":"BElYZkSwpVmrqEtFPwDdp2y-PqD0k79w3nQFmngDvKiyiOmwE9B8oc5J6ih3wPxF9nwWu-S60rGr4pbMS00Ix2w","auth":"ny6Ei7QkID-tIxKmcm4Wgg"}}
+```json
+{
+  "endpoint": "https://fcm.googleapis.com/fcm/send/cfA_9tbQmTc:APA91bHMKEZzt-lyJRSMUpR5o9MPR9EBIvZgqaIXTFjGWlsTnc1ZaMjcoocrzWCqGRLPjoqGfJriS3FATxzCeeNQvuuugEDCNmDYjVQ7r61puDogSvpOBUDXcBJYfAaS5c8mvsGYlZa6",
+  "expirationTime": null,
+  "keys": {
+    "p256dh": "BElYZkSwpVmrqEtFPwDdp2y-PqD0k79w3nQFmngDvKiyiOmwE9B8oc5J6ih3wPxF9nwWu-S60rGr4pbMS00Ix2w",
+    "auth": "ny6Ei7QkID-tIxKmcm4Wgg"
+  }
+}
 ```
 
 into the `Subscription to Send To` textArea.
@@ -112,6 +120,9 @@ Push sent to client
      connection: 'close' } }
 ```
 the notification will be send to client.
+
+## Testing
+According to my tests, this project code is works on Chrome Version 69, but not on Canary and Opera.
 
 ## Resources
 - https://developers.google.com/web/fundamentals/codelabs/push-notifications
